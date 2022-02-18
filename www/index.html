@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login i registre</title>
+    <script type="text/javascript">
+        let users = {pepe: {password: "123", email: "pepe@mail.com"}, lola: {password: "456", email: "lola@mail.com"}};
+
+        function fer_login() {
+            console.log("Trying to log in");
+            let userStr = document.getElementById("login_user").value;
+            let userPass = document.getElementById("login_pass").value;
+
+            if (users[userStr]["password"] == userPass) {
+                alert("Welcome, " + userStr);
+            } else {
+                alert("Wrong credentials.");
+            }
+        }
+
+        function register() {
+            console.log("About to register");
+            let userStr = document.getElementById("reg_user").value;
+            let userPass = document.getElementById("reg_pass").value;
+            let userPass2 = document.getElementById("reg_pass2").value;
+            let mail = document.getElementById("reg_mail").value;
+
+            if (userPass == userPass2 &&  userPass != "" && userStr != "")  {
+                if (users[userStr] != undefined) {
+                    alert("User already in system");
+                } else {
+                    users[userStr] = {password: userPass, email: mail};
+                    console.log(users);
+                    alert("User successfully registered. Welcome " + userStr);
+                }
+            } else if (userPass == "" || userStr == ""){
+                alert("There are empty fields");
+            } else {
+                alert("Passwords must match");
+            }
+        }
+
+    </script>
+</head>
+<body>
+    
+    <form name="Login">
+        <fieldset name="Login" style="background-color: cadetblue;"><legend>Login</legend>
+            <label for="username">Name: </label><br>
+            <input id="login_user" type="text" name="username" form="Login"><br>
+            <label for="password">Password: </label><br>
+            <input id="login_pass"type="password" name="password" form="Login"><br>
+            <input type="submit" form="Login" value="Login!" onclick="fer_login()"></input>
+        </fieldset>
+    </form>
+    
+    <form name="Register">
+        <fieldset name="Register" style="background-color: cadetblue;"><legend>Register</legend>
+            <label for="username">Name: </label><br>
+            <input id="reg_user" type="text" name="username" form="Register"><br>
+            <label for="email">Email: </label><br>
+            <input id="reg_mail" type="email" name="email" form="Register"><br>
+            <label for="password">Password: </label><br>
+            <input id="reg_pass" type="password" name="password" form="Register"><br>
+            <label for="password2">Repeat password: </label><br>
+            <input id="reg_pass2" type="password" name="password2" form="Register"><br>
+            <input type="submit" form="Register" value="Register!" onclick="register()"></input>
+        </fieldset>
+    </form>
+</body>
+</html>
